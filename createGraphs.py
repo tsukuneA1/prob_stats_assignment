@@ -2,26 +2,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-# 日本語フォントの設定 (ご自身の環境に合わせてフォント名を変更してください)
-# Windows: "Yu Gothic", "Meiryo"など
-# macOS: "Hiragino Sans"など
-# Linux: "IPAexGothic"など (要インストール)
 plt.rcParams['font.sans-serif'] = ['Yu Gothic']
-plt.rcParams['axes.unicode_minus'] = False # マイナス記号の文字化け防止
+plt.rcParams['axes.unicode_minus'] = False
 
-# 入力・出力ディレクトリ
 INPUT_DIR = './output'
 OUTPUT_DIR = './output'
 
 def plot_histogram(filename, title, xlabel, ylabel):
-    """CSVからヒストグラムを作成し保存する"""
-    print(f"グラフ作成中: {title}")
     df = pd.read_csv(f"{INPUT_DIR}/{filename}")
     plt.figure(figsize=(10, 6))
-    
-    # 棒グラフとしてプロット
     plt.bar(df.iloc[:, 0].astype(str), df.iloc[:, 1])
-    
     plt.title(title, fontsize=16)
     plt.xlabel(xlabel, fontsize=12)
     plt.ylabel(ylabel, fontsize=12)
@@ -31,8 +21,6 @@ def plot_histogram(filename, title, xlabel, ylabel):
     plt.close()
 
 def plot_line_chart(filename, title, y_cols):
-    """CSVから折れ線グラフを作成し保存する"""
-    print(f"グラフ作成中: {title}")
     df = pd.read_csv(f"{INPUT_DIR}/{filename}")
     plt.figure(figsize=(12, 6))
     
@@ -49,7 +37,6 @@ def plot_line_chart(filename, title, y_cols):
     plt.close()
 
 def main():
-    """メイン処理"""
     if not os.path.exists(INPUT_DIR):
         print(f"エラー: 入力ディレクトリ'{INPUT_DIR}'が見つかりません。")
         print("先にTypeScriptスクリプトを実行してCSVファイルを生成してください。")
